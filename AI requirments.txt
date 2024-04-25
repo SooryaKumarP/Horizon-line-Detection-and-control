@@ -1,0 +1,52 @@
+Super computer 
+NVIDIA Jetson TX2 - 50000 rs
+Augmented Reality Headsets (Meta Quest 3 128GB Console Virtual Reality) - 54,990 rs
+Motion Tracking Devices - Leap Motion Gesture Controller for PC/MAC: ₹25,555
+High-performance Computing (HPC) Systems - 260000rs
+Smartphones/Tablets - ipad - 100000
+Nvidia Jetson Nano Development Kit (128 Cuda Cores, Cortex-A57) - Latest B0 Model with Barrel Adapter - 26,995 rs
+Raspberry Pi 5 (8 GB RAM) Basic Starter Kit - Rs. 10,250.00 rs
+Intel Realsense L515 Lidar Depth Camera (Black) - 63,999 rs
+camera - OpenMV Cam RT1062 - 10,000
+
+
+
+
+
+
+Cloud Services
+
+Visualization Tools
+   >High-resolution displays, VR (Virtual Reality), or AR (Augmented ality)
+
+Cooling and Power Supply
+Data Collection and Preprocessing Hardware
+
+Cluster Management Software
+   >Kubernetes, Docker Swarm, or Apache Mesos
+
+Networking
+   >High-speed network connections are necessary for distributed computing, data transfer.
+
+High-performance Computing (HPC) Systems
+
+Version Control System
+
+Software Stack
+   >frameworks like TensorFlow, PyTorch, scikit-learn, Caffe, Caffe 2, Keras, CUDA, and cuDNN,  Keras
+
+Data Annotation Tools
+
+A R
+
+Motion Tracking Devices
+
+3D Scanners and Cameras
+   >Creating 3D models of real-world objects or environments is often a part of AR development. 3D scanners and cameras allow developers to capture physical objects or spaces and incorporate them into AR applications. Examples include structured light scanners, laser scanners, and photogrammetry cameras.
+
+Development Kits and SDKs
+   > AR development kits and software development kits (SDKs) are necessary for building AR applications. Platforms like Unity3D, Unreal Engine, ARKit (for iOS), ARCore (for Android), Vuforia, and Wikitude provide tools and resources for creating AR content.
+
+Smartphones/Tablets
+
+
