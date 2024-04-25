@@ -102,7 +102,7 @@ def monitor():
                 new_ail_ctrl = roll_PID.output
 
                 # Get the simulated pitch value
-                pitch = calculate_pitch(edge_coordinates, w, h)  # Assuming pitch is the 4th value in the returned list
+                pitch = client.getPOSI()[3]
 
                 # Update PID controller with simulated pitch value
                 pitch_PID.update(pitch)

@@ -58,7 +58,7 @@ altitude_PID = PID.PID(P, I, D)
 
 # setting the desired values
 # roll = 0 means wings level
-desired_roll = -10
+desired_roll = 0
 desired_pitch = 10
 #desired_altitude_offset = 1000  # Desired altitude offset from the horizon line
 
