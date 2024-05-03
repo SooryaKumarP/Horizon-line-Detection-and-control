@@ -65,7 +65,7 @@ altitude_PID = PID.PID(P, I, D)
 
 # setting the desired values
 desired_roll = 0
-desired_pitch = 0
+desired_pitch = 2
 desired_altitude = 5000
 
 # setting the PID set points with our desired values
@@ -96,7 +96,7 @@ p1.showGrid(y=True)
 p2.showGrid(y=True)
 p3.showGrid(y=True)
 
-x, y, w, h = 200, 200, 1400, 900
+x, y, w, h = 200, 200, 1600, 800
 
 DREFs = ["sim/cockpit2/gauges/indicators/airspeed_kts_pilot",
          "sim/cockpit2/gauges/indicators/heading_electric_deg_mag_pilot",
@@ -203,7 +203,7 @@ def monitor():
                 p3.plot(x_axis_counters, altitude_history, pen=0, clear=True)
                 p3.plot(x_axis_counters, altitude_setpoint_history, pen=1)
 
-                ctrl = [new_ele_ctrl, new_ail_ctrl, 0.0, -998]
+                ctrl = [new_ele_ctrl, new_ail_ctrl, 0.0, 100]
                 client.sendCTRL(ctrl)
 
                 
