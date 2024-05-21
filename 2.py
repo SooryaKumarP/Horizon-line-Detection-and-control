@@ -63,7 +63,7 @@ def normalize(value, min=-1, max=1):
     else:
         return value
 
-update_interval = 0.000  # seconds, 0.05 = 20 Hz
+update_interval = 0.05  # seconds, 0.05 = 20 Hz
 start = datetime.now()
 last_update = start
 
@@ -79,8 +79,8 @@ altitude_PID = PID.PID(P, I, D)
 
 # setting the desired values
 desired_roll = 0
-desired_pitch = 0
-desired_altitude = 5000
+desired_pitch = 10
+desired_altitude = 3000
 
 # setting the PID set points with our desired values
 roll_PID.SetPoint = desired_roll
@@ -95,9 +95,13 @@ roll_setpoint_history = []
 pitch_setpoint_history = []
 altitude_setpoint_history = []
 plot_array_max_length = 1000
-i = 1
+i = 20000
 
 app = pg.mkQApp("python xplane autopilot monitor")
+# Set background color to white
+pg.setConfigOption('background', 'w')
+pg.setConfigOption('foreground', 'k')
+
 win = pg.GraphicsLayoutWidget(show=True)
 win.resize(1000, 600)
 win.setWindowTitle("XPlane autopilot system control")
@@ -109,6 +113,8 @@ p3 = win.addPlot(title="altitude", row=2, col=0)
 p1.showGrid(y=True)
 p2.showGrid(y=True)
 p3.showGrid(y=True)
+
+
 
 x, y, w, h = 250, 200, 1400, 900
 
@@ -164,7 +170,7 @@ def monitor():
                     ctrl = client.getCTRL()
                     multi_DREFs = client.getDREFs(DREFs)
 
-                    current_roll = filtered_roll
+                    current_roll = calculate_pitch_and_roll(frame, horizon_line, center_vertical_line, center_horizontal_line)
                     current_pitch = posi[3]
                     current_hdg = multi_DREFs[1][0]
                     current_altitude = multi_DREFs[3][0]
@@ -174,7 +180,7 @@ def monitor():
                     pg.QtGui.QGuiApplication.processEvents()
 
                     altitude_PID.update(current_altitude)
-                    pitch_PID.SetPoint = normalize(altitude_PID.output, min=-15, max=10)
+                    pitch_PID.SetPoint = normalize(altitude_PID.output, min=-10, max=10)
                     roll_PID.update(current_roll)
                     pitch_PID.update(current_pitch)
 
@@ -207,14 +213,15 @@ def monitor():
                         altitude_setpoint_history.append(desired_altitude)
                     i = i + 1
 
-                    p1.plot(x_axis_counters, roll_history, pen=0, clear=True)
-                    p1.plot(x_axis_counters, roll_setpoint_history, pen=1)
+                    # Set line colors
+                    p1.plot(x_axis_counters, roll_history, pen=pg.mkPen(color=(0, 0, 255)), clear=True)  # Blue line
+                    p1.plot(x_axis_counters, roll_setpoint_history, pen=pg.mkPen(color=(255, 0, 0)))  # Red line
 
-                    p2.plot(x_axis_counters, pitch_history, pen=0, clear=True)
-                    p2.plot(x_axis_counters, pitch_setpoint_history, pen=1)
+                    p2.plot(x_axis_counters, pitch_history, pen=pg.mkPen(color=(0, 0, 255)), clear=True)  # Blue line
+                    p2.plot(x_axis_counters, pitch_setpoint_history, pen=pg.mkPen(color=(255, 0, 0)))  # Red line
 
-                    p3.plot(x_axis_counters, altitude_history, pen=0, clear=True)
-                    p3.plot(x_axis_counters, altitude_setpoint_history, pen=1)
+                    p3.plot(x_axis_counters, altitude_history, pen=pg.mkPen(color=(0, 0, 255)), clear=True)  # Blue line
+                    p3.plot(x_axis_counters, altitude_setpoint_history, pen=pg.mkPen(color=(255, 0, 0)))  # Red line
 
                     ctrl = [new_ele_ctrl, new_ail_ctrl, 0.0, -998]
                     client.sendCTRL(ctrl)

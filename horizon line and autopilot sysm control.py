@@ -12,7 +12,7 @@ import pyautogui
 def calculate_pitch(edge_coordinates, w, h):
     # Calculate the center point of the image
     image_center_x = w / 2
-    image_center_y = h / 2
+    image_center_y = h / 2 
 
     # Calculate the center point of the horizon line
     horizon_center_x = (edge_coordinates[-1][0] + edge_coordinates[0][0]) / 2
@@ -65,8 +65,8 @@ altitude_PID = PID.PID(P, I, D)
 
 # setting the desired values
 desired_roll = 0
-desired_pitch = 2
-desired_altitude = 5000
+desired_pitch = 0
+desired_altitude = 6000
 
 # setting the PID set points with our desired values
 roll_PID.SetPoint = desired_roll
@@ -82,6 +82,11 @@ pitch_setpoint_history = []
 altitude_setpoint_history = []
 plot_array_max_length = 1000
 i = 1
+
+app = pg.mkQApp("python xplane autopilot monitor")
+# Set background color to white
+pg.setConfigOption('background', 'w')
+pg.setConfigOption('foreground', 'black')
 
 app = pg.mkQApp("python xplane autopilot monitor")
 win = pg.GraphicsLayoutWidget(show=True)
@@ -151,7 +156,7 @@ def monitor():
                 ctrl = client.getCTRL()
                 multi_DREFs = client.getDREFs(DREFs)
 
-                current_roll = calculate_pitch_and_roll(frame, horizon_line, center_vertical_line, center_horizontal_line) 
+                current_roll = posi[4]
                 current_pitch = posi[3]
                 current_hdg = multi_DREFs[1][0]
                 current_altitude = multi_DREFs[3][0]
@@ -182,7 +187,7 @@ def monitor():
                     roll_setpoint_history.append(desired_roll)
                     pitch_history.append(current_pitch)
                     pitch_setpoint_history.append(pitch_PID.SetPoint)
-                    altitude_history.append(0)
+                    altitude_history.append(current_altitude)
                     altitude_setpoint_history.append(desired_altitude)
                 else:
                     x_axis_counters.append(i)
@@ -190,7 +195,7 @@ def monitor():
                     roll_setpoint_history.append(desired_roll)
                     pitch_history.append(current_pitch)
                     pitch_setpoint_history.append(pitch_PID.SetPoint)
-                    altitude_history.append(0)
+                    altitude_history.append(current_altitude)
                     altitude_setpoint_history.append(desired_altitude)
                 i = i + 1
 
@@ -203,7 +208,7 @@ def monitor():
                 p3.plot(x_axis_counters, altitude_history, pen=0, clear=True)
                 p3.plot(x_axis_counters, altitude_setpoint_history, pen=1)
 
-                ctrl = [new_ele_ctrl, new_ail_ctrl, 0.0, 100]
+                ctrl = [new_ele_ctrl, new_ail_ctrl, 0.0, -998]
                 client.sendCTRL(ctrl)
 
                 

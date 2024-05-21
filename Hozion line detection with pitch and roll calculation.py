@@ -46,10 +46,10 @@ while True:
 
     # Convert the frame to grayscale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('Frame', gray)
+    #cv2.imshow('Frame', gray)
 
     # Apply Canny edge detection
-    edges = cv2.Canny(gray, 10, 20)
+    edges = cv2.Canny(gray, 10, 250)
 
     # Apply dilation followed by erosion (closing operation) to clear unwanted edges
     kernel = np.ones((5, 5), np.uint8)
@@ -89,7 +89,7 @@ while True:
 
     # Display both edge detection and line detection
     cv2.imshow('Horizon Line Detection', frame)
-    #cv2.imshow('Edge Detection', edges)
+    cv2.imshow('Edge Detection', edges)
 
     # Add vertical and horizontal lines
     # Vertical line at the center

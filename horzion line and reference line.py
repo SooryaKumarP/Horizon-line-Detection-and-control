@@ -26,7 +26,7 @@ def calculate_pitch_and_roll(image, horizon_line, center_vertical_line, center_h
 
 while True:
     # Capture a cropped region of the screen
-    x, y, w, h = 100, 150, 1400, 1000  # Adjust these values based on your specific region of interest
+    x, y, w, h = 200, 200, 1600, 800  # Adjust these values based on your specific region of interest
     screenshot = pyautogui.screenshot(region=(x, y, w, h))
 
     # Convert the screenshot to a NumPy array
@@ -73,9 +73,15 @@ while True:
         # Draw horizon line
         cv2.line(frame, (horizon_line[0], horizon_line[1]), (horizon_line[2], horizon_line[3]), (0, 0, 255), 2)
 
+         # Calculate and display pitch angle
+        cv2.putText(frame, f'Pitch: {pitch:.2f}%', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+
+                # Display roll value
+        cv2.putText(frame, f'Roll: {roll:.2f}', (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+
     # Display both edge detection and line detection
     cv2.imshow('Horizon Line Detection', frame)
-    cv2.imshow('Edge Detection', edges)
+    #cv2.imshow('Edge Detection', edges)
 
     # Add vertical and horizontal lines
     # Vertical line at the center
@@ -83,7 +89,7 @@ while True:
     # Horizontal line at the center
     cv2.line(frame, (0, h // 2), (w, h // 2), (255, 0, 0), 3)
     # Display the frame with lines
-    cv2.imshow('Vertical and Horizontal Lines', frame)
+    #cv2.imshow('Vertical and Horizontal Lines', frame)
 
     # Break the loop on 'q' key press
     if cv2.waitKey(1) & 0xFF == ord('z'):

@@ -58,7 +58,7 @@ while True:
 
     # Display both edge detection and line detection
     cv2.imshow('Edge and Line Detection', frame)
-    cv2.imshow('Edge Detection', edges)
+    #cv2.imshow('Edge Detection', edges)
 
     # Break the loop on 'q' key press
     if cv2.waitKey(1) & 0xFF == ord('z'):
